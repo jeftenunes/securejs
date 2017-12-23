@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "app_user",
+    "password": null,
+    "database": "securedb_development",
+    "host": "192.168.99.100",
+    "port": "32768",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "app_user",
+    "password": null,
+    "database": "securedb_test",
+    "host": "192.168.99.100",
+    "port": "32768",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "app_user",
+    "password": null,
+    "database": "securedb_production",
+    "host": "192.168.99.100",
+    "port": "32768",
+    "dialect": "postgres"
+  }
+}
