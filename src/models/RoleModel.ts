@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
+import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface RoleAttributes {
     id?: number;
@@ -39,6 +40,16 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) 
     }, {
         tableName: 'roles',
     });
+
+    Role.associate = (models: ModelsInterface): void => {
+        Role.hasMany(models.Permission, {
+            foreignKey: {
+                name: 'roleId',
+                allowNull: false,
+              },
+              as: 'permissions'
+        });
+    };
 
     return Role;
 };

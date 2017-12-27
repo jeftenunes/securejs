@@ -1,6 +1,8 @@
 import * as Sequelize from 'sequelize';
 import { genSaltSync, hashSync, compareSync, genSalt } from 'bcryptjs';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
+import { ModelsInterface } from '../interfaces/ModelsInterface';
+import RoleModel from './RoleModel';
 
 export interface UserAttributes {
     id?: number;
@@ -80,6 +82,16 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) 
 
         User.prototype.verifyPassword = (encodedPassword: string, inputPassword: string): boolean => 
             compareSync(inputPassword, encodedPassword);
+
+        User.associate = (models: ModelsInterface): void => {
+            User.hasMany(models.Role, {
+                foreignKey: {
+                    name: 'userId',
+                    allowNull: false,
+                  },
+                  as: 'roles'
+            });
+        };
 
     return User;
 };

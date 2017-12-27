@@ -12,6 +12,9 @@ let db = null;
 if(!db) {
   db = {};
 
+  const operatorAliases = false;
+  config = Object.assign({ operatorAliases }, config);
+
   var sequelize: Sequelize.Sequelize = config.use_env_variable 
   ? new Sequelize(process.env[config.use_env_variable])
   : new Sequelize(config.database, config.username, config.password, config);  
