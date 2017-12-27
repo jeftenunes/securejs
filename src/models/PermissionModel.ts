@@ -1,5 +1,6 @@
 import * as Sequelize from 'sequelize';
 import { BaseModelInterface } from '../interfaces/BaseModelInterface';
+import { ModelsInterface } from '../interfaces/ModelsInterface';
 
 export interface PermissionAttributes {
     id?: number;
@@ -39,6 +40,16 @@ export default (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) 
     }, {
         tableName: 'permissions',
     });
+
+    Permission.associate = (models: ModelsInterface): void => {
+        Permission.hasOne(models.Resource, {
+            foreignKey: {
+                name: 'permissionId',
+                allowNull: false,
+              },
+              as: 'resource'
+        });
+    };
 
     return Permission;
 };
